@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: codetogether
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        fromService:
+          type: web
+          name: codetogether
+          property: host
+    healthCheckPath: /health
